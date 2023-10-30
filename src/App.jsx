@@ -39,8 +39,10 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="review" element={<Review />} />
+            {/*//@ host => vans */}
             <Route path="vans">
               <Route index element={<HostVans />} />
+              {/*//@ host => vans => id */}
               <Route path=":id" element={<HostVansDetails />}>
                 <Route index element={<Details />} />
                 <Route path="pricing" element={<Pricing />} />

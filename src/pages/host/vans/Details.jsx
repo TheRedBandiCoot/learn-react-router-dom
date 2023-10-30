@@ -2,25 +2,22 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 const Details = () => {
-  const data = useOutletContext();
-  const recoverData = data?.[0];
-  if (!recoverData) {
-    return <h2>Loading...</h2>;
-  }
-  const { name, description, type } = recoverData;
+  const { name, description, type } = useOutletContext();
   return (
-    <div>
-      <h1>Details</h1>
-      <h3>Name : {name}</h3>
-      <p>
-        <b>Description :</b>
-        <span>{description}</span>
-      </p>
-      <p>
-        <b>Category :</b>
-        <span>{type}</span>
-      </p>
-    </div>
+    <section className="host-van-detail-info">
+      <h4>
+        Name : <span>{name}</span>
+      </h4>
+      <h4>
+        Category : <span>{type}</span>
+      </h4>
+      <h4>
+        Description : <span>{description}</span>
+      </h4>
+      <h4>
+        Visibility: <span>public</span>
+      </h4>
+    </section>
   );
 };
 

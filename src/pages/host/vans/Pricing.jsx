@@ -2,13 +2,13 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 const Pricing = () => {
-  const data = useOutletContext();
-  const recoverData = data?.[0];
-  if (!recoverData) {
-    return <h2>Loading...</h2>;
-  }
-  const { price } = recoverData;
-  return <div>${price}/day</div>;
+  const { price } = useOutletContext();
+  return (
+    <h3 className="host-van-price">
+      ${price}
+      <span>/day</span>
+    </h3>
+  );
 };
 
 export default Pricing;
