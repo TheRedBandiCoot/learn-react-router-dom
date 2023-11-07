@@ -12,6 +12,10 @@ export default function Home() {
       <Link className="btn" to="vans">
         Find your van
       </Link>
+      <div className="money">
+        <h1>Mom : 100</h1>
+        <h1>DIDI: 54</h1>
+      </div>
     </div>
   );
 }

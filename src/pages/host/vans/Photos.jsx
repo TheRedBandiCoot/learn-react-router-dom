@@ -1,9 +1,16 @@
 import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
+import VansModal from '../../../components/VansModal';
+
+export function loader({ request }) {
+  return request;
+}
 
 const Photos = () => {
-  const { imageUrl } = useOutletContext();
-  return <img src={imageUrl} className="host-van-detail-image" />;
+  const van = useOutletContext();
+  const { url } = useLoaderData();
+
+  return <VansModal url={url} van={van} clsName={'host-van-detail-image'} />;
 };
 
 export default Photos;
