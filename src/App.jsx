@@ -46,8 +46,8 @@ import HostVanDetail, { loader as hostVansDetailsLoader } from './pages/host/Hos
 
 //@ Pages => host => vans
 import Details from './pages/host/vans/Details';
-import Photos, { loader as photoLoader } from './pages/host/vans/photos';
-import Pricing from './pages/host/vans/pricing';
+import Photos, { loader as photoLoader } from './pages/host/vans/Photos';
+import Pricing from './pages/host/vans/Pricing';
 
 // const router = createBrowserRouter([
 //   {
