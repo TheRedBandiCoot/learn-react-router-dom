@@ -14,6 +14,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
+import './servers/server';
 
 //@ components
 import Layout from './components/Layout';

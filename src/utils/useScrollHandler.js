@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useReducer, useState } from 'react';
 import { FETCH_DATA, SET_NUMBER } from './actions';
-import '../servers/server';
+// import '../servers/server';
 import axios from 'axios';
 import { scroll } from './utils';
 import { getVans } from './api';
