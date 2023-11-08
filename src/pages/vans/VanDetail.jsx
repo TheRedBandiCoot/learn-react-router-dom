@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { NavLink, useParams, useLocation, useLoaderData, defer, Await } from 'react-router-dom';
 // import VansModal from './VansModal';
-import { getVans } from '../../utils/api';
+import { getVan } from '../../utils/api';
 import VansModal from '../../components/VansModal';
 
 export function loader({ params }) {
-  return defer({ van: getVans(params.id) });
+  return defer({ van: getVan(params.id) });
 }
 
 const VanDetail = () => {

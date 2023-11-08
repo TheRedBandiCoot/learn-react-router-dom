@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams, Link, NavLink, Outlet, useLoaderData, defer, Await } from 'react-router-dom';
-import { getHostVans } from '../../utils/api';
+import { getVan } from '../../utils/api';
 import VansModal from '../../components/VansModal';
 
 export function loader({ params }) {
-  return defer({ currentVan: getHostVans(params.id) });
+  return defer({ currentVan: getVan(params.id) });
 }
 
 export default function HostVanDetail() {

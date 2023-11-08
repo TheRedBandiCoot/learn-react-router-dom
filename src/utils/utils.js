@@ -23,23 +23,23 @@ export async function requireAuth(request) {
   const isLoggedIn = JSON.parse(localStorage.getItem('loggedin'));
   if (!isLoggedIn) {
     const res = redirect(`/login?message=You Must Login First&redirect=${pathname}`);
-    res.body = true;
+    // res.body = true;
     return res;
   }
   return pathname;
 }
 
-export async function loginUser(creds) {
-  const res = await fetch('/api/login', { method: 'post', body: JSON.stringify(creds) });
-  const data = await res.json();
+// export async function loginUser(creds) {
+//   const res = await fetch('/api/login', { method: 'post', body: JSON.stringify(creds) });
+//   const data = await res.json();
 
-  if (!res.ok) {
-    throw {
-      message: data.message,
-      statusText: res.statusText,
-      status: res.status,
-    };
-  }
+//   if (!res.ok) {
+//     throw {
+//       message: data.message,
+//       statusText: res.statusText,
+//       status: res.status,
+//     };
+//   }
 
-  return data;
-}
+//   return data;
+// }

@@ -8,7 +8,7 @@ export function loader({ request }) {
   const isLoggedIn = JSON.parse(localStorage.getItem('loggedin'));
   // console.log('test login');
   const res = redirect("/host?message=You're already loggedin that's why redirect to Host");
-  res.body = true;
+  // res.body = true;
   if (isLoggedIn) return res;
   const msg = new URL(request.url).searchParams.get('message');
   const logoutMsg = new URL(request.url).searchParams.get('logoutMSG');

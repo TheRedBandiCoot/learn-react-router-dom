@@ -14,19 +14,19 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import './servers/server';
+// import './servers/server';
 
 //@ components
 import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import Error from './components/Error';
-// import { action as loginAction } from './components/LoginForm';
+import { action as loginAction } from './components/LoginForm';
 
 //@ utils
 import { useScrollHandler } from './utils/useScrollHandler';
 import { reducer } from './utils/reducer';
 import { initialState } from './utils/initialState';
-import { loginUser, requireAuth } from './utils/utils';
+import { requireAuth } from './utils/utils';
 
 //@ Pages
 import Home from './pages/Home';
@@ -68,37 +68,19 @@ import Pricing from './pages/host/vans/Pricing';
 function App() {
   // const { state, loading, error } = useScrollHandler(reducer, initialState);
 
-  const [userData, setUserData] = React.useState(null);
-
-  async function loginAction({ params, request }) {
-    try {
-      const form = await request.formData();
-      const email = form.get('email');
-      const password = form.get('password');
-      const {
-        user: { name },
-      } = await loginUser({ email, password });
-      // console.log(name);
-      // const res = redirect(`/vans?username=${name}`);
-      setUserData(name);
-      localStorage.setItem('loggedin', JSON.stringify(true));
-      const pathname = new URL(request.url).searchParams.get('redirect') || '/host';
-      const res = redirect(`${pathname}?username=${name}`);
-      res.body = true;
-
-      return res;
-    } catch (error) {
-      return error;
-    }
-  }
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         {/*//@ Home */}
         <Route index element={<Home />} />
         {/*//@ Login */}
-        <Route path="login" action={loginAction} element={<Login />} loader={loginLoader} />
+        <Route
+          path="login"
+          errorElement={<Error />}
+          action={loginAction}
+          element={<Login />}
+          loader={loginLoader}
+        />
         {/*//@ Vans */}
         <Route
           path="vans"
@@ -120,6 +102,7 @@ function App() {
           path="host"
           loader={async ({ request }) => await requireAuth(request)}
           element={<HostLayout />}
+          errorElement={<Error />}
         >
           <Route
             index
@@ -129,10 +112,11 @@ function App() {
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 iconVariant={{ info: '🎉 ' }}
               >
-                <Dashboard userData={userData} />
+                <Dashboard />
               </SnackbarProvider>
             }
             loader={dashboardLoader}
+            errorElement={<Error />}
           />
 
           {/* <Route element={<CheckIncome />}> */}

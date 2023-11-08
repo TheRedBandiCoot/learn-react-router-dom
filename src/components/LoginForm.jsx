@@ -1,7 +1,25 @@
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import { loginUser } from '../utils/utils';
 import { Form, redirect, useNavigate, useActionData, useNavigation } from 'react-router-dom';
+import { loginUser } from '../utils/api';
+
+export async function action({ params, request }) {
+  try {
+    const form = await request.formData();
+    const email = form.get('email');
+    const password = form.get('password');
+    const userEmail = await loginUser({ email, password });
+    // console.log(data);
+    // const res = redirect(`/vans?username=${name}`);
+    localStorage.setItem('loggedin', JSON.stringify(true));
+    const pathname = new URL(request.url).searchParams.get('redirect') || '/host';
+    const res = redirect(`${pathname}?username=${userEmail}`);
+    // res.body = true;
+    return res;
+  } catch (error) {
+    return error;
+  }
+}
 
 const LoginForm = ({}) => {
   const [loginFormData, setLoginFormData] = React.useState({ email: 'foo@foo.com', password: 'foo@bar' });
@@ -11,29 +29,29 @@ const LoginForm = ({}) => {
   const error = useActionData();
   const navigation = useNavigation();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('submitting');
-    try {
-      const {
-        user: { name },
-      } = await loginUser(loginFormData);
-      // navigate('/vans', { state: name, replace: true });
-    } catch (err) {
-      enqueueSnackbar(`wrong credentials : ${err.message}`, { variant: 'error', autoHideDuration: 3000 });
-      throw Error('err');
-    } finally {
-      setStatus('idle');
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setStatus('submitting');
+  //   try {
+  //     const {
+  //       user: { name },
+  //     } = await loginUser(loginFormData);
+  //     // navigate('/vans', { state: name, replace: true });
+  //   } catch (err) {
+  //     enqueueSnackbar(`wrong credentials : ${err.message}`, { variant: 'error', autoHideDuration: 3000 });
+  //     throw Error('err');
+  //   } finally {
+  //     setStatus('idle');
+  //   }
+  // };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setLoginFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
   React.useEffect(() => {
     if (!error) return;
@@ -58,7 +76,7 @@ const LoginForm = ({}) => {
       <input
         // onChange={handleChange}
         // value={loginFormData.password}
-        defaultValue="123"
+        defaultValue="1&%SSc*SYCS*"
         type="password"
         name="password"
         placeholder="password"

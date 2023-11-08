@@ -19,7 +19,7 @@ export async function loader({ request }) {
   }
 }
 
-const Dashboard = ({ userData }) => {
+const Dashboard = ({}) => {
   const { username, msg, vans } = useLoaderData();
   React.useEffect(() => {
     if (!username) return;
